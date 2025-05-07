@@ -43,7 +43,7 @@ public class TodoCsvFilesRepository implements ITodoRepository {
                 }
             }
         } catch (IOException e) {
-            throw new UncheckedIOException("Impossible d'initialiser le fichier CSV", e);
+            throw new UncheckedIOException("It's impossible to create the CSV file", e);
         }
     }
 
@@ -58,7 +58,7 @@ public class TodoCsvFilesRepository implements ITodoRepository {
             writer.write(toCsvLine(todo));
             writer.newLine();
         } catch (IOException e) {
-            throw new UncheckedIOException("Impossible d'écrire le todo dans le CSV", e);
+            throw new UncheckedIOException("It's impossible to write the todo in the CSV file", e);
         }
     }
 
@@ -73,7 +73,7 @@ public class TodoCsvFilesRepository implements ITodoRepository {
                 todos.add(parseCsvLine(line));
             }
         } catch (IOException e) {
-            throw new UncheckedIOException("Impossible de lire les todos depuis le CSV", e);
+            throw new UncheckedIOException("It's impossible to read the CSV file", e);
         }
         return todos;
     }

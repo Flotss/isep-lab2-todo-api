@@ -13,6 +13,6 @@ public class Todo {
     @NotBlank
     public String name;
 
-    @Future(message = "La date doit être dans le futur")
+    @Future(message = "The date must be in the future")
     private Date date;
 }

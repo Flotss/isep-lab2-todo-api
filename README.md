@@ -120,7 +120,21 @@ Run the tests using:
 
 ## Error Handling
 
-The application includes a global exception handler that provides detailed error messages for validation failures and other exceptions.
+The application includes a global exception handler that provides detailed error messages for:
+- Validation failures (400 Bad Request)
+  - Field validation errors (e.g., required fields, future date validation)
+  - Each field error includes the field name and error message
+- Illegal argument exceptions (400 Bad Request)
+  - Business rule violations
+  - Invalid input data
+
+Example error response for validation:
+```json
+{
+    "date": "La date doit être dans le futur",
+    "name": "Le nom est requis"
+}
+```
 
 ## License
 
