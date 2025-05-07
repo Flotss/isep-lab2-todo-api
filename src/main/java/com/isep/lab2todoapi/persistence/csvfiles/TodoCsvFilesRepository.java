@@ -21,7 +21,6 @@ import java.util.List;
 
 @Service
 public class TodoCsvFilesRepository implements ITodoRepository {
-
     private static final String PATH = "./storage/todos.csv";
     private static final String SEPARATOR = ",";
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE;
@@ -49,6 +48,10 @@ public class TodoCsvFilesRepository implements ITodoRepository {
 
     @Override
     public void addTodo(Todo todo) {
+        if (!isValidName(todo.getName())) {
+            throw new IllegalArgumentException("Todo already exists");
+        }
+
         Path path = Paths.get(PATH);
         try (BufferedWriter writer = Files.newBufferedWriter(
                 path,
@@ -98,5 +101,10 @@ public class TodoCsvFilesRepository implements ITodoRepository {
             date = Date.from(ld.atStartOfDay(ZoneId.systemDefault()).toInstant());
         }
         return new Todo(name, date);
+    }
+
+    private boolean isValidName(String name) {
+        return getAllTodos().stream()
+                .noneMatch(todo -> todo.getName().equals(name));
     }
 }
