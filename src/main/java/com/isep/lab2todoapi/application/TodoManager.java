@@ -8,7 +8,11 @@ import java.util.List;
 
 @Component
 public class TodoManager {
-    ITodoRepository todoRepository = new TodoInMemoryRepository();
+    private final ITodoRepository todoRepository;
+
+    public TodoManager(ITodoRepository todoRepository) {
+        this.todoRepository = todoRepository;
+    }
 
     public void addTodo(Todo todo) {
         todoRepository.addTodo(todo);
